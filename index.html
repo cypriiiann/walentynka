@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dla Ciebie ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #ffe6f0, #ffc2d1);
+        font-family: Arial, sans-serif;
+        text-align: center;
+        height: 100vh;
+    }
+
+    h1 {
+        margin-top: 100px;
+        color: #c9184a;
+        font-size: 32px;
+        padding: 0 20px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 12px 20px;
+        margin: 20px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+    #tak {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #nie {
+        background-color: #999;
+        color: white;
+        position: absolute;
+    }
+
+    .heart {
+        position: absolute;
+        color: #ff4d6d;
+        animation: spadaj linear infinite;
+    }
+
+    @keyframes spadaj {
+        0% {
+            transform: translateY(-10vh);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>Czy zostaniesz moją Walentynką? ❤️</h1>
+
+<button id="tak" onclick="odpowiedzTak()">Tak 💖</button>
+<button id="nie">Nie 😅</button>
+
+<script>
+const nieButton = document.getElementById("nie");
+
+function odpowiedzTak() {
+    document.body.innerHTML = "<h1>Kocham Cię ❤️</h1><p> 💕</p>";
+}
+
+function uciekaj() {
+    const szerokosc = window.innerWidth - 100;
+    const wysokosc = window.innerHeight - 60;
+
+    const losowaX = Math.floor(Math.random() * szerokosc);
+    const losowaY = Math.floor(Math.random() * wysokosc);
+
+    nieButton.style.left = losowaX + "px";
+    nieButton.style.top = losowaY + "px";
+}
+
+/* Dla komputera */
+nieButton.addEventListener("mouseover", uciekaj);
+
+/* Dla telefonu */
+nieButton.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    uciekaj();
+});
+
+function stworzSerce() {
+    const serce = document.createElement("div");
+    serce.classList.add("heart");
+    serce.innerHTML = "❤️";
+
+    serce.style.left = Math.random() * 100 + "vw";
+    serce.style.fontSize = (Math.random() * 20 + 15) + "px";
+    serce.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    document.body.appendChild(serce);
+
+    setTimeout(() => {
+        serce.remove();
+    }, 5000);
+}
+
+setInterval(stworzSerce, 300);
+</script>
+
+</body>
+</html>
+
